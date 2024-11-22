@@ -137,6 +137,7 @@ Uma aplicação conceito onde o usuário poderá solicitar uma viagem em carro p
 - [x] **API REST**: Comunicação entre o **frontend** e **backend**.
 
 <hr>  
+
 ## 📦 Estrutura do Projeto
 
 ```bash
@@ -195,7 +196,8 @@ git clone https://github.com/FelipeSdsilva/challenge-drivers
 cd challenge-drivers
 ```
   
-  <hr>
+<hr>
+
 ## 🐳 Docker (PRINCiPAL)
 
 ### Executar Backend e Frontend com Docker:
@@ -215,7 +217,7 @@ docker-compose up
 
 <hr>
 
-##📄 **Exemplos de Endpoints**
+## 📄 **Exemplos de Endpoints**
 
 <hr>  
 
