@@ -1,3 +1,5 @@
+# VERSION (EN) 
+
 # API BLESSEDDRIVE
 
 A conceptual application where users can request a private car ride from point A to point B. Users can choose between different driver options and prices, confirm the ride, and view the history of completed rides.
@@ -6,12 +8,13 @@ A conceptual application where users can request a private car ride from point A
 
 ## 📋 Features
 
- - [x] **Ride Pricing:** Calculate the price for a ride based on distance and selected driver.
- - [x] **Confirm Ride:** Confirm a ride with a selected driver.
- - [x] **Ride History:** View the history of completed rides.
- - [x] **REST API:** **Backend** and **frontend** communication.
+ - [x] **Ride Pricing:** Calculate the price for a ride based on distance and selected driver.
+ - [x] **Confirm Ride:** Confirm a ride with a selected driver.
+ - [x] **Ride History:** View the history of completed rides.
+ - [x] **REST API:** **Backend** and **frontend** communication.
 
 <hr>
+
 ## 📦 Project Structure
 
 ```bash
@@ -74,7 +77,6 @@ cd challenge-drivers
 
 <hr>
 
-
 ## 🐳 **Docker (Preferred Method)**
 
 ### **Run Backend and Frontend with Docker**
@@ -98,36 +100,46 @@ docker-compose up
 
 
 <hr>
+
 ## 📄 License
 
 This project is licensed under the SaaS License. Check the LICENSE file for more details.
 
-  <hr>
+<hr>
+
 ## ✉️ Contact
 
 Felipe Sousa da Silva
+
 [WhatsApp](https://web.whatsapp.com/send?phone=11954705118)
+
 [GitHub](https://github.com/FelipeSdsilva)  
+
 [✉️ E-mail](felipe.fps09@hotmail.com)
+
 [LinkedIn](https://www.linkedin.com/in/felipesdsilva/)
+
+<hr>
+
+# VERSION (PT-BR)
 
 # API BLESSEDDRIVE
 
 Uma aplicação conceito onde o usuário poderá solicitar uma viagem em carro particular de um ponto A até um ponto B. Ele poderá escolher entre algumas opções de motoristas e valores e confirmar a viagem. Poderá ver o histórico das viagens realizadas.  
 
 <hr>
+
 ## 📋 Funcionalidades
 
-- [x] **Valor da viagem**: .
-- [x] **Confirmar viagem**: .
-- [x] **Histórico de viagens**: .
+- [x] **Valor da viagem**: Calcule o preço de uma viagem com base na distância e no motorista selecionado.
+- [x] **Confirmar viagem**: Confirme uma viagem com um motorista selecionado.
+- [x] **Histórico de viagens**: Veja o histórico de viagens concluídas.
 - [x] **API REST**: Comunicação entre o **frontend** e **backend**.
 
 <hr>  
 ## 📦 Estrutura do Projeto
 
-
- ```bash
+```bash
 /challenge-drivers
 ├── backend/
 │   ├── prisma/                     # Configuração do Prisma ORM
@@ -164,6 +176,7 @@ Uma aplicação conceito onde o usuário poderá solicitar uma viagem em carro p
 ```
 
 <hr>
+
 ## ⚙️ Como Executar
   
 Pré-requisitos
@@ -202,19 +215,23 @@ docker-compose up
 
 <hr>
 
-## 📄 **Exemplos de Endpoints**
-  
+##📄 **Exemplos de Endpoints**
 
 <hr>  
+
 ## 📄 Licença
 
 Este projeto é licenciado sob a **SaaS License**. Consulte [LICENSE](https://github.com/felipesousasilva/adocao-animais/license) para mais detalhes.
 
 ---  
+
 ## ✉️ Contato
 
 **Felipe Sousa da Silva**  
 [WhatsApp](https://web.whatsapp.com/send?phone=11954705118)
+
 [GitHub](https://github.com/FelipeSdsilva)  
+
 [✉️ E-mail](felipe.fps09@hotmail.com)
+
 [LinkedIn](https://www.linkedin.com/in/felipesdsilva/)
