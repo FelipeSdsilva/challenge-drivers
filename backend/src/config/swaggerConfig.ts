@@ -4,7 +4,9 @@ const swaggerOptions = {
         info: {
             title: 'API BLESSEDDRIVE',
             version: '1.0.0',
-            description: '',
+            description: `This project presents a challenge. \n
+            It aims to resolve a quest about users requesting a trip in a private car from point A to point B.\n
+            The users can have options for drivers and values, confirm the trip, and list historic of trips.`,
             contact: {
                 name: 'Felipe Sousa',
                 email: 'felipe.fps09@hotmail.com',
@@ -17,7 +19,7 @@ const swaggerOptions = {
             },
         ],
     },
-    apis: ['./src/routes/*.ts'], // Caminho para os arquivos de rotas com anotações
+    apis: ['./src/common/routes/*.ts'],
 };
 
 export default swaggerOptions;

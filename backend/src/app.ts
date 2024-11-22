@@ -1,15 +1,15 @@
 import cors from 'cors';
 import helmet from 'helmet';
 import express from 'express';
-import swaggerJsDoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
-import swaggerOptions from './config/swaggerConfig';
+import router from './common/routes';
+import { errorHandler } from './common/middlewares/errorHandler';
+import { notFoundRequest } from './common/middlewares/notFoundRequest';
 
 const app = express();
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-app.use(express.json());
 app.use(helmet());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -17,6 +17,8 @@ app.use(cors({
     credentials: true
 }));
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/', router);
+app.use(notFoundRequest);
+app.use(errorHandler);
 
 export default app;
