@@ -1,9 +1,12 @@
 import { prisma } from "../../db/prisma";
+import { DriverMinDTO } from "../DTO/driverMinDTO";
 import { DriverOptionDTO } from "../DTO/driverOptionDTO";
 import { LocationDTO } from "../DTO/locationDTO";
 import { RideEstimateDTO } from "../DTO/rideEstimateDTO";
+import { RideMinDTO } from "../DTO/rideMinDTO";
 import { RiderConfirmeDTO } from "../DTO/riderConfirmDTO";
-import { driverNotFoundError, invalidDataError, invalidDistanceError } from "../middlewares/errorHandler";
+import { RidesHistoryDTO } from "../DTO/ridesHistoryDTO";
+import { driverNotFoundError, invalidDataError, invalidDistanceError, ridersNotFoundError } from "../middlewares/errorHandler";
 import { fetchRouteFromGoogleMaps } from "../utils/requests/googleMapsAPI";
 
 export const calculateEstimate = async (customer_id: string, origin: string, destination: string, next: Function) => {
@@ -19,7 +22,7 @@ export const calculateEstimate = async (customer_id: string, origin: string, des
                 );
         };
 
-        const routeData = await fetchRouteFromGoogleMaps(origin, destination, next);
+        const routeData = await fetchRouteFromGoogleMaps(origin, destination, next) ?? { distance: 0, origin: { lat: 0, lng: 0 }, destination: { lat: 0, lng: 0 }, duration: 0, routeResponse: {} };
 
         const driversData = await prisma.driver.findMany({
             select: {
@@ -48,12 +51,12 @@ export const calculateEstimate = async (customer_id: string, origin: string, des
             .sort((a, b) => a.value - b.value);
 
         const response = new RideEstimateDTO(
-            new LocationDTO(routeData.origin.lat, routeData.origin.lng),
-            new LocationDTO(routeData.destination.lat, routeData.destination.lng),
+            new LocationDTO(routeData?.origin.lat, routeData?.origin.lng),
+            new LocationDTO(routeData?.destination.lat, routeData?.destination.lng),
             routeData.distance,
             routeData.duration,
             availableDrivers,
-            routeData.routeResponse
+            routeData?.routeResponse
         );
         return response;
 
@@ -122,7 +125,58 @@ export const saveRide = async (rideData: RiderConfirmeDTO, next: Function) => {
 };
 
 
-export const fetchRides = async (customer_id: string, driver_id?: string) => {
+export const fetchRides = async (customer_id: string, next: Function, driver_id?: string) => {
+    try {
+        if (!customer_id) {
 
-    return [];
+            return next(invalidDataError("ID user cannot be empty."));
+        }
+
+        if (driver_id) {
+            const driverExists = await prisma.driver.findUnique({ where: { id: parseInt(driver_id) } });
+            if (!driverExists) {
+                return next(driverNotFoundError("A valid driver must be provided."))
+            }
+        }
+
+        const rides = await prisma.ride.findMany({
+            where: {
+                customerId: parseInt(customer_id),
+                ...(driver_id && { driverId: parseInt(driver_id) })
+            },
+            orderBy: { date: "desc" },
+            include: {
+                driver: true
+            }
+        });
+
+        if (!rides.length) {
+            return next(ridersNotFoundError("No rides found for the specified criteria."));
+        }
+
+        const rideMinDTOs = rides.map(ride => {
+            let driverDTO = new DriverMinDTO(
+                ride.driver.id,
+                ride.driver.name
+            );
+
+            return new RideMinDTO(
+                ride.id,
+                ride.date,
+                ride.origin,
+                ride.destination,
+                ride.duration,
+                ride.distance,
+                driverDTO,
+                ride.value
+            )
+        });
+
+        const ridesHistoryDTO = new RidesHistoryDTO(customer_id, rideMinDTOs);
+
+        return ridesHistoryDTO;
+    } catch (error) {
+        console.log(error);
+        next(error)
+    }
 };

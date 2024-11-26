@@ -32,7 +32,7 @@ export const getRides = async (req: Request, res: Response, next: NextFunction) 
   try {
     const { customer_id } = req.params;
     const { driver_id } = req.query;
-    const rides = await fetchRides(customer_id, driver_id as string);
+    const rides = await fetchRides(customer_id,next, driver_id as string);
     res.status(200).json(rides);
   } catch (error) {
     next(error);

@@ -1,6 +1,6 @@
 export class DriverMinDTO {
 
-    private id: number;
+    id: number;
     private name: string;
 
     constructor(id: number, name: string) {

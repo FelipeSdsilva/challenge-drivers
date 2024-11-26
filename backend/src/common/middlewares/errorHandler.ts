@@ -47,3 +47,12 @@ export const invalidDistanceError = (description: string): CustomError => ({
     error_code: 'INVALID_DISTANCE',
     error_description: description,
 });
+
+
+export const ridersNotFoundError = (description: string): CustomError => ({
+    name: 'InvalidDistanceError',
+    message: 'Invalid distance for the selected driver',
+    status: 404,
+    error_code: 'NO_RIDES_FOUND',
+    error_description: description,
+});

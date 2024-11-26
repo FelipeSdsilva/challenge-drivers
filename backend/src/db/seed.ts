@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 async function main() {
     try {
-        // Criando as avaliações
+      
         const homerReview = await prisma.review.create({
             data: {
                 rating: 2,
@@ -29,7 +29,7 @@ async function main() {
         });
         console.log('James Bond Review Created:', jamesBondReview);
 
-        // Criando os motoristas
+        
         const homer = await prisma.driver.create({
             data: {
                 name: 'Homer Simpson',
