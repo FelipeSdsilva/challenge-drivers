@@ -12,13 +12,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-    origin: 'http://localhost:5173',
-    methods: ["GET", "POST", "PATH"],
-    credentials: true
+    origin: '*',
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+    allowedHeaders: "*", 
 }));
 
 app.use('/', router);
-app.use(notFoundRequest);
-app.use(errorHandler);
+app.use(notFoundRequest);   
+app.use(errorHandler);  
 
-export default app;
+export default app; 
