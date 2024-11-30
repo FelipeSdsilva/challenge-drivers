@@ -19,12 +19,13 @@ import {
 } from "@mui/material";
 import { BASE_URL_LOCAl } from "../../utils/sistem";
 import axios from "axios";
+import type { HistoricRider } from "../../models/historicRider.model";
 
 export default function HistoricRider() {
 
     const [userId, setUserId] = useState<string>("");
     const [selectedDriver, setSelectedDriver] = useState<string>("all");
-    const [rides, setRides] = useState<Ride[]>([]);
+    const [rides, setRides] = useState<HistoricRider[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
     const fetchRides = async () => {

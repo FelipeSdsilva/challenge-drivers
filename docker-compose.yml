@@ -1,0 +1,50 @@
+services:
+  blesseddriver-backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    environment:
+      DATABASE_URL: "postgresql://postgres:mysecretpassword@postgresql:5432/challenge-shopper?schema=public"
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    networks:
+      - felipe-network
+    restart: unless-stopped
+    depends_on:
+      - postgresql
+
+  blesseddriver-frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+    networks:
+      - felipe-network
+    restart: unless-stopped
+    depends_on:
+      - blesseddriver-backend
+
+  postgresql:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: challenge-shopper
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - felipe-network
+
+networks:
+  felipe-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
